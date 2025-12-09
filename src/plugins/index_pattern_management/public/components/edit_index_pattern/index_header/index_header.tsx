@@ -43,6 +43,7 @@ interface IndexHeaderProps {
   setDefault?: () => void;
   refreshFields?: () => void;
   deleteIndexPatternClick?: () => void;
+  rightContent?: React.ReactNode;
 }
 
 const setDefaultAriaLabel = i18n.translate(
@@ -81,6 +82,7 @@ export function IndexHeader({
   setDefault,
   refreshFields,
   deleteIndexPatternClick,
+  rightContent,
 }: IndexHeaderProps) {
   const {
     uiSettings,
@@ -157,7 +159,8 @@ export function IndexHeader({
         </EuiText>
       </EuiFlexItem>
       <EuiFlexItem grow={false}>
-        <EuiFlexGroup responsive={false}>
+        <EuiFlexGroup responsive={false} alignItems="center" gutterSize="m">
+          {rightContent && <EuiFlexItem grow={false}>{rightContent}</EuiFlexItem>}
           {defaultIndex !== indexPattern.id && setDefault && (
             <EuiFlexItem>
               <EuiToolTip content={setDefaultTooltip}>

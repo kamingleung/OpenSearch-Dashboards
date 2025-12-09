@@ -40,6 +40,8 @@ import {
   EuiLink,
   EuiCallOut,
   EuiPanel,
+  EuiDescriptionList,
+  EuiButtonIcon,
 } from '@elastic/eui';
 import { i18n } from '@osd/i18n';
 import { FormattedMessage } from '@osd/i18n/react';
@@ -297,6 +299,113 @@ export const EditIndexPattern = withRouter(
             </EuiCallOut>
           </>
         )}
+        <EuiSpacer size="m" />
+        <EuiPanel paddingSize="m">
+          <EuiFlexGroup justifyContent="spaceBetween" gutterSize="l">
+            <EuiFlexItem grow={1}>
+              <EuiDescriptionList
+                listItems={[
+                  {
+                    title: i18n.translate('indexPatternManagement.editIndexPattern.metadata.type', {
+                      defaultMessage: 'Type',
+                    }),
+                    description: 'Logs',
+                  },
+                ]}
+              />
+            </EuiFlexItem>
+            <EuiFlexItem grow={1}>
+              <EuiDescriptionList
+                listItems={[
+                  {
+                    title: (
+                      <EuiFlexGroup gutterSize="xs" alignItems="center" responsive={false}>
+                        <EuiFlexItem grow={false}>
+                          {i18n.translate(
+                            'indexPatternManagement.editIndexPattern.metadata.dataScope',
+                            {
+                              defaultMessage: 'Data scope',
+                            }
+                          )}
+                        </EuiFlexItem>
+                        <EuiFlexItem grow={false}>
+                          <EuiButtonIcon
+                            iconType="pencil"
+                            aria-label={i18n.translate(
+                              'indexPatternManagement.editIndexPattern.metadata.editDataScope',
+                              {
+                                defaultMessage: 'Edit data scope',
+                              }
+                            )}
+                            color="text"
+                            size="xs"
+                          />
+                        </EuiFlexItem>
+                      </EuiFlexGroup>
+                    ),
+                    description: (
+                      <>
+                        <EuiText size="s">{indexPattern.title}</EuiText>
+                      </>
+                    ),
+                  },
+                ]}
+              />
+            </EuiFlexItem>
+            <EuiFlexItem grow={1}>
+              <EuiDescriptionList
+                listItems={[
+                  {
+                    title: (
+                      <EuiFlexGroup gutterSize="xs" alignItems="center" responsive={false}>
+                        <EuiFlexItem grow={false}>
+                          {i18n.translate(
+                            'indexPatternManagement.editIndexPattern.metadata.primaryFields',
+                            {
+                              defaultMessage: 'Primary fields',
+                            }
+                          )}
+                        </EuiFlexItem>
+                        <EuiFlexItem grow={false}>
+                          <EuiButtonIcon
+                            iconType="pencil"
+                            aria-label={i18n.translate(
+                              'indexPatternManagement.editIndexPattern.metadata.editPrimaryFields',
+                              {
+                                defaultMessage: 'Edit primary fields',
+                              }
+                            )}
+                            color="text"
+                            size="xs"
+                          />
+                        </EuiFlexItem>
+                      </EuiFlexGroup>
+                    ),
+                    description: indexPattern.timeFieldName ? (
+                      <EuiFlexGroup gutterSize="xs" alignItems="center" responsive={false}>
+                        <EuiFlexItem grow={false}>
+                          <EuiBadge color="hollow">
+                            {i18n.translate(
+                              'indexPatternManagement.editIndexPattern.metadata.timefield',
+                              {
+                                defaultMessage: 'Timefield',
+                              }
+                            )}
+                          </EuiBadge>
+                        </EuiFlexItem>
+                        <EuiFlexItem grow={false}>
+                          <EuiText size="s">{indexPattern.timeFieldName}</EuiText>
+                        </EuiFlexItem>
+                      </EuiFlexGroup>
+                    ) : (
+                      '-'
+                    ),
+                  },
+                ]}
+              />
+            </EuiFlexItem>
+          </EuiFlexGroup>
+        </EuiPanel>
         <Tabs
           indexPattern={indexPattern}
           saveIndexPattern={data.indexPatterns.updateSavedObject.bind(data.indexPatterns)}
@@ -306,28 +415,128 @@ export const EditIndexPattern = withRouter(
         />
       </div>
     ) : (
-      <EuiPanel paddingSize={'l'}>
-        <div data-test-subj="editIndexPattern" role="region" aria-label={headingAriaLabel}>
-          <IndexHeader
-            indexPattern={indexPattern}
-            setDefault={setDefaultPattern}
-            refreshFields={refreshFields}
-            deleteIndexPatternClick={removePattern}
-            defaultIndex={defaultIndex}
-          />
-          <EuiSpacer size="s" />
-          {showTagsSection && renderBadges()}
-          <EuiSpacer size="m" />
-          {renderDescription()}
-          {conflictedFields.length > 0 && (
-            <>
-              <EuiSpacer />
-              <EuiCallOut title={mappingConflictHeader} color="warning" iconType="alert">
-                <p>{mappingConflictLabel}</p>
-              </EuiCallOut>
-            </>
-          )}
-          <EuiSpacer />
+      <div data-test-subj="editIndexPattern" role="region" aria-label={headingAriaLabel}>
+        <IndexHeader
+          indexPattern={indexPattern}
+          setDefault={setDefaultPattern}
+          refreshFields={refreshFields}
+          deleteIndexPatternClick={removePattern}
+          defaultIndex={defaultIndex}
+        />
+        {showTagsSection && (
+          <>
+            <EuiSpacer size="s" />
+            {renderBadges()}
+          </>
+        )}
+        <EuiSpacer size="m" />
+        <EuiPanel paddingSize="m">
+          <EuiFlexGroup justifyContent="spaceBetween" gutterSize="l">
+            <EuiFlexItem>
+              <EuiDescriptionList
+                compressed
+                listItems={[
+                  {
+                    title: i18n.translate('indexPatternManagement.editIndexPattern.metadata.type', {
+                      defaultMessage: 'Type',
+                    }),
+                    description: 'Logs',
+                  },
+                ]}
+              />
+            </EuiFlexItem>
+            <EuiFlexItem>
+              <EuiDescriptionList
+                compressed
+                listItems={[
+                  {
+                    title: (
+                      <EuiFlexGroup gutterSize="xs" alignItems="center" responsive={false}>
+                        <EuiFlexItem grow={false}>
+                          {i18n.translate(
+                            'indexPatternManagement.editIndexPattern.metadata.dataScope',
+                            {
+                              defaultMessage: 'Data scope',
+                            }
+                          )}
+                        </EuiFlexItem>
+                        <EuiFlexItem grow={false}>
+                          <EuiButtonIcon
+                            iconType="pencil"
+                            aria-label={i18n.translate(
+                              'indexPatternManagement.editIndexPattern.metadata.editDataScope',
+                              {
+                                defaultMessage: 'Edit data scope',
+                              }
+                            )}
+                            color="text"
+                            size="xs"
+                          />
+                        </EuiFlexItem>
+                      </EuiFlexGroup>
+                    ),
+                    description: indexPattern.title,
+                  },
+                ]}
+              />
+            </EuiFlexItem>
+            <EuiFlexItem>
+              <EuiDescriptionList
+                compressed
+                listItems={[
+                  {
+                    title: (
+                      <EuiFlexGroup gutterSize="xs" alignItems="center" responsive={false}>
+                        <EuiFlexItem grow={false}>
+                          {i18n.translate(
+                            'indexPatternManagement.editIndexPattern.metadata.primaryFields',
+                            {
+                              defaultMessage: 'Primary fields',
+                            }
+                          )}
+                        </EuiFlexItem>
+                        <EuiFlexItem grow={false}>
+                          <EuiButtonIcon
+                            iconType="pencil"
+                            aria-label={i18n.translate(
+                              'indexPatternManagement.editIndexPattern.metadata.editPrimaryFields',
+                              {
+                                defaultMessage: 'Edit primary fields',
+                              }
+                            )}
+                            color="text"
+                            size="xs"
+                          />
+                        </EuiFlexItem>
+                      </EuiFlexGroup>
+                    ),
+                    description: indexPattern.timeFieldName ? (
+                      <EuiFlexGroup gutterSize="xs" alignItems="center" responsive={false}>
+                        <EuiFlexItem grow={false}>
+                          <EuiBadge color="hollow">
+                            {i18n.translate(
+                              'indexPatternManagement.editIndexPattern.metadata.timefield',
+                              {
+                                defaultMessage: 'Timefield',
+                              }
+                            )}
+                          </EuiBadge>
+                        </EuiFlexItem>
+                        <EuiFlexItem grow={false}>
+                          <EuiText size="s">{indexPattern.timeFieldName}</EuiText>
+                        </EuiFlexItem>
+                      </EuiFlexGroup>
+                    ) : (
+                      '-'
+                    ),
+                  },
+                ]}
+              />
+            </EuiFlexItem>
+          </EuiFlexGroup>
+        </EuiPanel>
+        <EuiSpacer size="m" />
+        <EuiPanel paddingSize="none">
           <Tabs
             indexPattern={indexPattern}
             saveIndexPattern={data.indexPatterns.updateSavedObject.bind(data.indexPatterns)}
@@ -335,8 +544,8 @@ export const EditIndexPattern = withRouter(
             history={history}
             location={location}
           />
-        </div>
-      </EuiPanel>
+        </EuiPanel>
+      </div>
     );
   }
 );
