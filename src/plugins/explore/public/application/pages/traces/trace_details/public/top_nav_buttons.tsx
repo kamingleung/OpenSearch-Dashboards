@@ -116,16 +116,17 @@ export const TraceTopNavMenu: React.FC<TraceTopNavMenuProps> = ({
       </EuiFlexItem>
       {isFlyout && (
         <EuiFlexItem grow={false}>
-          <EuiLink
+          <EuiButton
             href={traceDetailsLink}
             data-test-subj="traceDetailsLink"
-            external
-            target="blank"
+            target="_blank"
+            size="s"
+            iconType="popout"
           >
             {i18n.translate('explore.traceDetails.topNav.openFullPage', {
               defaultMessage: 'Open full page',
             })}
-          </EuiLink>
+          </EuiButton>
         </EuiFlexItem>
       )}
       <EuiFlexItem />
