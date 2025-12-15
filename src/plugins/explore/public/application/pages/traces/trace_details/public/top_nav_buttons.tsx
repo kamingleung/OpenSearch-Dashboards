@@ -19,7 +19,6 @@ import {
   EuiFlexGroup,
   EuiFlexItem,
   EuiTitle,
-  EuiLink,
   EuiIcon,
   EuiText,
 } from '@elastic/eui';
@@ -108,7 +107,7 @@ export const TraceTopNavMenu: React.FC<TraceTopNavMenuProps> = ({
         </EuiFlexGroup>
       </EuiFlexItem>
       <EuiFlexItem grow={false}>
-        <EuiButton size="s" onClick={() => setRawModalOpen(true)} data-test-subj="viewRawDataBtn">
+        <EuiButton size="s" onClick={() => setRawModalOpen(true)} data-test-subj="viewRawDataBtn" iconType="visVega">
           {i18n.translate('explore.traceDetails.topNav.viewRawData', {
             defaultMessage: 'View raw trace',
           })}
@@ -116,16 +115,17 @@ export const TraceTopNavMenu: React.FC<TraceTopNavMenuProps> = ({
       </EuiFlexItem>
       {isFlyout && (
         <EuiFlexItem grow={false}>
-          <EuiLink
+          <EuiButton
             href={traceDetailsLink}
             data-test-subj="traceDetailsLink"
-            external
-            target="blank"
+            target="_blank"
+            size="s"
+            iconType="popout"
           >
             {i18n.translate('explore.traceDetails.topNav.openFullPage', {
               defaultMessage: 'Open full page',
             })}
-          </EuiLink>
+          </EuiButton>
         </EuiFlexItem>
       )}
       <EuiFlexItem />
