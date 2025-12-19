@@ -216,6 +216,11 @@ export const SpanDetailTabs: React.FC<SpanDetailTabsProps> = ({
                 })}
               </h2>
             </EuiTitle>
+            {selectedSpan?.name && (
+              <EuiTitle size="xs">
+                <h3>{selectedSpan.name}</h3>
+              </EuiTitle>
+            )}
           </EuiFlexItem>
           {serviceName && (
             <EuiFlexItem grow={false}>
