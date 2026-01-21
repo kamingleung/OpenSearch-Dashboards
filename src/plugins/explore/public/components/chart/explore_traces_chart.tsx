@@ -15,7 +15,6 @@ import {
   EuiToolTip,
   EuiLoadingSpinner,
   EuiCallOut,
-  EuiIcon,
 } from '@elastic/eui';
 import { i18n } from '@osd/i18n';
 import { IUiSettingsClient } from 'opensearch-dashboards/public';
@@ -26,6 +25,7 @@ import { TimechartHeader, TimechartHeaderBucketInterval } from './timechart_head
 import { DiscoverHistogram } from './histogram/histogram';
 import { ExploreServices } from '../../types';
 import { Chart } from './utils';
+import { ErrorMessageModal } from './error_message_modal';
 import {
   setInterval,
   clearResultsByKey,
@@ -340,15 +340,17 @@ export const ExploreTracesChart = ({
                     iconType="alert"
                     size="s"
                   >
-                    <p>
-                      {requestError.originalErrorMessage ||
+                    <ErrorMessageModal
+                      errorMessage={
+                        requestError.originalErrorMessage ||
                         requestError.message?.details ||
                         requestError.error ||
                         i18n.translate('explore.traces.error.requestChartFallback', {
                           defaultMessage:
                             'Failed to load request count data. Please try again or check your query.',
-                        })}
-                    </p>
+                        })
+                      }
+                    />
                   </EuiCallOut>
                 ) : (
                   <div className="exploreTracesChart__loading">
@@ -411,15 +413,17 @@ export const ExploreTracesChart = ({
                     iconType="alert"
                     size="s"
                   >
-                    <p>
-                      {errorQueryError.originalErrorMessage ||
+                    <ErrorMessageModal
+                      errorMessage={
+                        errorQueryError.originalErrorMessage ||
                         errorQueryError.message?.details ||
                         errorQueryError.error ||
                         i18n.translate('explore.traces.error.errorChartFallback', {
                           defaultMessage:
                             'Failed to load error count data. Please try again or check your query.',
-                        })}
-                    </p>
+                        })
+                      }
+                    />
                   </EuiCallOut>
                 ) : (
                   <div className="exploreTracesChart__loading">
@@ -477,15 +481,17 @@ export const ExploreTracesChart = ({
                     iconType="alert"
                     size="s"
                   >
-                    <p>
-                      {latencyError.originalErrorMessage ||
+                    <ErrorMessageModal
+                      errorMessage={
+                        latencyError.originalErrorMessage ||
                         latencyError.message?.details ||
                         latencyError.error ||
                         i18n.translate('explore.traces.error.latencyChartFallback', {
                           defaultMessage:
                             'Failed to load latency data. Please try again or check your query.',
-                        })}
-                    </p>
+                        })
+                      }
+                    />
                   </EuiCallOut>
                 ) : (
                   <div className="exploreTracesChart__loading">
