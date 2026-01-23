@@ -226,6 +226,7 @@
   - [RELEASING](../RELEASING.md)
   - [SECURITY](../SECURITY.md)
   - [TESTING](../TESTING.md)
+  - [TEST_REQUIREMENTS](../TEST_REQUIREMENTS.md)
   - [TRIAGING](../TRIAGING.md)
   - [TYPESCRIPT](../TYPESCRIPT.md)
   - [Testing_strategy](../testing_strategy.md)

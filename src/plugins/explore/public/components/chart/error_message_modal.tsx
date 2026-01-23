@@ -27,9 +27,13 @@ export const ErrorMessageModal: React.FC<ErrorMessageModalProps> = ({
 
   // Ensure error message is a string
   const errorString =
-    typeof errorMessage === 'string' ? errorMessage : JSON.stringify(errorMessage, null, 2);
+    typeof errorMessage === 'string'
+      ? errorMessage
+      : errorMessage !== undefined && errorMessage !== null
+      ? JSON.stringify(errorMessage, null, 2)
+      : String(errorMessage);
 
-  const shouldTruncate = errorString.length > maxLength;
+  const shouldTruncate = errorString && errorString.length > maxLength;
   const displayMessage = shouldTruncate ? `${errorString.substring(0, maxLength)}...` : errorString;
 
   const closeModal = () => setIsModalVisible(false);
